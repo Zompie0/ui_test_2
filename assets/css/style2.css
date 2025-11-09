@@ -15,6 +15,7 @@ body {
 .Test1{
   width: 135px;
   height: 190px;
+  min-width: 130px
 }
 
 .Test1 img {
@@ -30,7 +31,7 @@ body {
 }
 
 .line {
-  display: inline;
+  display:inline-block;
 }
 
 .line div {
@@ -177,4 +178,3 @@ body {
   text-align: center;
   font-size: 6rem;
 }
-
