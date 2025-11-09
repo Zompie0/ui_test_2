@@ -34,11 +34,11 @@ body {
 }
 
 .line div {
-  display: flex;
   writing-mode: vertical-rl;/*縦書き*/
+  font-weight: bold;
   font-size: 0.8em;
   color: #ffffff;
-  justify-content: center;
+  text-align: center;
 
   padding: 0.25em 0.1em;
   background-color: #0044ff;
