@@ -5,163 +5,580 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UI2</title>
     <meta name="description" content="UI">
-    <link rel="stylesheet" href="./assets/css/style2.css">
+    <!-- <link rel="stylesheet" href="./style.css"> -->
+    <style>
+body {
+  font-family: system-ui, sans-serif;
+  background:#f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+button {
+  padding: 0;
+  border: none;
+  outline: none;
+  font: inherit;
+  color: inherit;
+  background: none;
+  text-align: left;
+}
+
+/* 横並び化 */
+#books{
+  display: flex;
+  align-items: flex-start;
+}
+
+/* バックグラウンド */
+button.main{
+  max-width: 135px;
+  min-width: 135px;
+  height: 190px;
+  border-radius: 15px;
+  display: flex;
+  transition: background 150ms ease;
+}
+button.main:hover{
+  background: #cacdd4;
+  filter: brightness(0.95);
+  
+}
+
+/* メニュー */
+.menu{
+  display: flex;
+  writing-mode: vertical-rl;
+  width: 1.25em;
+  height: 190px;
+  align-items: center; 
+  text-align: center;
+}
+.menu .orientation{
+  padding: 0.25em 0.1em;
+  display: inline-block;
+  height: 3.5em;
+  background-color: #000000;
+  color: white;
+  font-weight: bold;
+  font-size: 0.8em;
+  border-radius: 15px;
+}
+.menu .nsfw{
+  display: inline-block;
+  height: 1.12em;
+  width: 1.12em;
+  margin-bottom: 0.1em;
+  background-color: #bd133e;
+  border-radius: 15px;
+}
+.menu a{
+  text-align: left; 
+  writing-mode: vertical-rl; 
+  letter-spacing: -0.5em; 
+  height: 45px; 
+  text-decoration: none; 
+  color: #4d4d4d;
+}
+
+/* タイトル */
+.title{
+  display: block;
+}
+.title img{
+  margin: none;
+  width: 100px; 
+  height: 140px; 
+  object-fit: cover; 
+  background-color: #ffffff; 
+  border-radius: 6px;
+}
+.title strong{
+  display: inline-block;
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: top;
+}
+.title a{
+  display: block;
+  font-size: 0.7em;
+  width: 100px;
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis;
+}
+
+/* 以下、メインUI *//* レディレッド色#ED1A3D */
+
+/* 
+main, header, side配置
+*/
+#flex{
+  display: flex;
+}
+.cross{
+  position: fixed; margin-left: 3vh; width: 10vh; height: 100vh; background-color: #bd133e; top: 0; z-index: -1;
+}
+
+/* 
+head
+ */
+.head{
+  margin-top: 3vh;
+  background-color: #bd133e;
+  width: 100vw;
+  height: 10vh;
+  overflow: hidden;
+}
+.bg-text{
+  position: absolute;
+  color: #fff;
+  opacity: 0.4;
+  font-size: 8em;
+  letter-spacing: -0.05em;
+  top: -20px;
+  pointer-events: none;
+  transform: rotate(-5deg);
+}
+/* 
+sidemenu
+*/
+.sidemenu{
+  display: block; margin-left: 3vh; width: 10vh;
+}
+.sidebuttons{
+  position: sticky;
+  margin-left: -10vh;
+  top: 0;  display: block; width: 10vh; height: 90vh; z-index: 3;
+}
+.sidebuttons button{
+cursor: pointer;
+position: relative;
+background-color: #ffffff;
+font-weight: bold;
+padding-left: 10px;
+font-size: 1.5em;
+
+width: 200px;
+height: 50px;
+border-radius: 0 0 15px 0;
+border-right: 4px solid #000;
+border-bottom: 4px solid #000;
+
+transform: translateX(-90%);
+transition: transform 0.3s ease;
+}
+.sidebuttons button:hover{
+transform: translateX(-11%);
+  }
+.arrow2{
+  display: inline-block;
+  font-size: 0.4em;
+  position: absolute;
+  right: 5px;
+  transition: transform 0.3s ease;
+}
+.sidemenu button:hover .arrow2{
+  transform: rotate(90deg);
+}
+
+/* 
+mainmenu
+ */
+.mainmenu{
+  z-index: 2;
+  display: block;
+}
+.mainmenu #books{
+  padding-left: 0.5em;
+}
+.mask-main{
+  position: absolute;
+  top: 13vh;
+  left: 13vh;
+  width: calc(100vw - 200px);
+  height: 90vh;
+  background: #f4f4f4;
+  pointer-events: none;
+  z-index: 1;
+}
+.ahoybooks{
+  line-height: 1.05em;
+  font-weight: bold;
+  width: 52vw;
+  font-size: 3em;
+  color: #ffffff;
+  background-color: #000;
+  letter-spacing: -0.05em;
+}
+.search,.search3{
+  
+  padding: 0;
+  position: relative;
+  background-color: #f4f4f4;
+  font-weight: bold;
+  padding-left: 10px;
+  font-size: 1.5em;
+
+  width: 500px;
+  height: 50px;
+  border-radius: 0 0 50px 0;
+  border-right: 4px solid #000;
+  border-bottom: 4px solid #000;
+  transform: translateX(-27%);
+  }
+  .search input{
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    top: 20%;
+    right: 21.5%;
+  }
+
+
+  .search3{
+    width: 20vw;
+  border-radius: 50px 0 0 0;
+  border-left: 4px solid #bd133e;
+  border-top: 4px solid #bd133e;
+  border-right: none;
+  border-bottom: 4px solid #000;
+  transform: translateX(113%);
+  scale: 119%;
+  }
+  .searchArea{
+    width: 50vw;
+    height: 175px;
+    background-color: #ddd;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border-radius: 0 0 25px 0;
+  }
+  .searchArea #books{
+    display: flex;
+    flex: 0 0 auto;
+    transform: scale(0.8);
+    transform-origin: left center;
+  }
+
+  .bookArea{
+    width: 50vw;
+    height: 50vw;
+    background-color: #ddd;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-radius: 0 0 25px 0;
+  }
+  .bookArea #books{
+  display: flex;
+  flex-wrap: wrap;              /* ← 改行を許可 */
+  transform: scale(0.8);
+  transform-origin: left;
+}
+
+/* 1冊の幅を 1/5 に固定 */
+.bookArea #books > .main{
+  flex: 0 0 calc(100% / 5);     /* ← 5個で1行 */
+  max-width: calc(100% / 5);
+} 
+
+  .otherArea p{
+    margin: 0;
+    width: 50vw;
+    height: 50px;
+    background-color: #ddd;
+  }
+  .otherArea p:last-child{
+    margin-bottom: 1em;
+    border-radius: 0 0 25px 0;
+  }
+
+
+  @media (max-width: 768px) {
+  /* スマホ用 */
+  .sidemenu,
+  .cross,
+  .search3 {
+    display: none;
+  }
+  .head {
+    height: 10vh;
+    margin-top: 0;
+  }
+
+  .bg-text {
+    font-size: 5em;
+    top: 10;
+  }
+  .mainmenu {
+    width: 100vw;
+  }
+
+  .mask-main {
+    display: none;
+  }
+  .search {
+    transform: none;
+    width: 100vw;
+  }
+
+  .search input {
+    width: 80%;
+    right: 10%;
+  }
+
+  .ahoybooks {
+    width: auto;
+    font-size: 2em;
+  }
+  .bookArea {
+    width: 100vw;
+    height: auto;
+  }
+
+  .bookArea #books {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    transform: none;
+    margin: 0;
+  }
+
+  .bookArea #books > .main {
+    max-width: none;
+  }
+
+  .bookArea button.main{
+  transform: scale(0.9);
+  }
+  .searchArea {
+    width: 100vw;
+    border-radius: 0;
+  }
+  .searchArea #books {
+    transform: scale(0.9);
+  }
+
+  .otherArea p {
+    width: 100%;
+  }
+}
+
+
+
+
+
+    </style>
 </head>
 <body>
-  <h1>UIテスト1</h1>
 
-  <div class="Test0">
 
-    <!-- 以下、一つ目 -->
-    <div class="Test1">
+  <strong class="bg-text">TOP.</strong>
+  <div class="head"></div>
+  <div class="cross"></div>
 
-      <div class="flex">
-        <div class="line">
-          <div>横漫画</div>
-          <a href="#" class="option">・・・</a>
-        </div>
-
-        <div class="taitoru">
-          <img src="placeholder.png">
-          <div class="taitoru2">
-            <strong>タイトル</strong>
-            <a>作者</a>
-          </div>
-        </div>
-      </div>
+  <div id="flex">
+    <div class="sidemenu"></div>
+    <div class="sidebuttons">
+        <button onclick="alert('未実装❤')">OPTION.
+          <span class="arrow2" >▶</span>
+        </button>
+        <button onclick="alert('みっじそう')">ITEMS.
+          <span class="arrow2">▶</span>
+        </button>
+        <button onclick="alert('クリラ・レスコンディア')">YOUTUBE.
+          <span class="arrow2">▶</span>
+        </button>
+        <button onclick="alert('未実装')">XVIDEOS.
+          <span class="arrow2">▶</span>
+        </button>
+        <button onclick="alert('近日公開')">未実装.
+          <span class="arrow2">▶</span>
+        </button>
+        <button onclick="alert('大嘘')">本名一覧.
+          <span class="arrow2">▶</span>
+        </button>
     </div>
 
-    <!-- 以下、二つ目 -->
-     <div class="Test1">
+    <section class="mainmenu">
+      <!-- search -->
+      <button  class="search3"></button>
+      <div class="ahoybooks">Search.</div><!-- Search.文字 -->
+      <button class="search"><input type="text"></button>
+      
+      <div class="searchArea"><!-- 表示エリア -->
+        <div id="books">
+          <button class="main">
+            <div class="menu">
+              <div class="orientation">漫画</div>
+              <a>・・・</a>
+            </div>
 
-      <div class="flex">
-        <div class="line">
-          <div>縦漫画</div>
-          <a href="#" class="option">・・・</a>
-        </div>
+            <div class="title">
+              <img src="placeholder.png">
+              <strong title="TITLE">タイトル</strong><br>
+              <a>作者</a>
+            </div>
+          </button>
 
-        <div class="taitoru">
-          <img src="placeholder.png">
-          <div class="taitoru2">
-            <strong>タイトル２２２２２２２２２２２</strong>
-            <a>三島 由紀夫</a>
-          </div>
+          <button class="main">
+              <div class="menu">
+                <div class="orientation">小説</div>
+                <a>・・・</a>
+              </div>
+
+              <div class="title">
+                <img src="placeholder.png">
+                <strong title="TITLE">タイトル</strong><br>
+                <a>作者</a>
+              </div>
+          </button>
+
+          <button class="main">
+              <div class="menu">
+                <div class="orientation">縦漫画</div>
+                <a>・・・</a>
+              </div>
+
+              <div class="title">
+                <img src="placeholder.png">
+                <strong title="TITLE">タイトル</strong><br>
+                <a>作者</a>
+              </div>
+          </button>
+
+          <button class="main">
+              <div class="menu">
+                <div title="R18コンテンツです" class="nsfw"></div>
+                <div class="orientation">漫画</div>
+                <a>・・・</a>
+              </div>
+
+              <div class="title">
+                <img src="placeholder.png">
+                <strong title="TITLE">タイトル</strong><br>
+                <a>作者</a>
+              </div>
+          </button>
+
         </div>
       </div>
-    </div>
 
-    <!-- 以下、三つ目 -->
-    <div class="Test1">
 
-      <div class="flex">
-        <div class="line">
-          <div>小説</div>
-          <a href="#" class="option">・・・</a>
-        </div>
 
-        <div class="taitoru">
-          <img src="placeholder.png">
-          <div class="taitoru2">
-            <strong>ドーラ物語</strong>
-            <a>作者</a>
-          </div>
+      <!-- books -->
+      <div style="margin-top: 0.5em;" class="ahoybooks">Books.</div><!-- Books.文字 -->
+      <button class="search"></button><!-- 装飾 -->
+      <div class="bookArea" style="height: 50vw;">
+        <div id="books">
+
+          <button class="main">
+            <div class="menu">
+              <div class="orientation">漫画</div>
+              <a>・・・</a>
+            </div>
+
+            <div class="title">
+              <img src="placeholder.png">
+              <strong title="TITLE">タイトル</strong><br>
+              <a>作者</a>
+            </div>
+          </button>
+          <button class="main">
+            <div class="menu">
+              <div class="orientation">漫画</div>
+              <a>・・・</a>
+            </div>
+
+            <div class="title">
+              <img src="placeholder.png">
+              <strong title="TITLE">タイトル</strong><br>
+              <a>作者</a>
+            </div>
+          </button>
+          <button class="main">
+            <div class="menu">
+              <div class="orientation">漫画</div>
+              <a>・・・</a>
+            </div>
+
+            <div class="title">
+              <img src="placeholder.png">
+              <strong title="TITLE">タイトル</strong><br>
+              <a>作者</a>
+            </div>
+          </button>
+          <button class="main">
+            <div class="menu">
+              <div class="orientation">漫画</div>
+              <a>・・・</a>
+            </div>
+
+            <div class="title">
+              <img src="placeholder.png">
+              <strong title="TITLE">タイトル</strong><br>
+              <a>作者</a>
+            </div>
+          </button>
+
+          <button class="main">
+              <div class="menu">
+                <div class="orientation">小説</div>
+                <a>・・・</a>
+              </div>
+
+              <div class="title">
+                <img src="placeholder.png">
+                <strong title="TITLE">タイトル</strong><br>
+                <a>作者</a>
+              </div>
+          </button>
+
+          <button class="main">
+              <div class="menu">
+                <div class="orientation">縦漫画</div>
+                <a>・・・</a>
+              </div>
+
+              <div class="title">
+                <img src="placeholder.png">
+                <strong title="TITLE">タイトル</strong><br>
+                <a>作者</a>
+              </div>
+          </button>
+
+          <button class="main">
+              <div class="menu">
+                <div title="R18コンテンツです" class="nsfw"></div>
+                <div class="orientation">漫画</div>
+                <a>・・・</a>
+              </div>
+
+              <div class="title">
+                <img src="placeholder.png">
+                <strong title="TITLE">タイトル</strong><br>
+                <a>作者</a>
+              </div>
+          </button>
+
         </div>
       </div>
-    </div>
 
+      <!-- others -->
+      <div style="margin-top: 0.5em;" class="ahoybooks">Others.</div><!-- Others.文字 -->
+      <button class="search"></button><!-- 装飾 -->
+        <div class="otherArea">
+          <p>未実装</p>
+          <p>未実装</p>
+          <p>未実装</p>
+          <p>未実装</p>
+        </div>
+
+    </section>
 
   </div>
-    <div id="groupList"><div class="group-item">
 
-      <!-- 以下　菊門疆1 -->
-      <div class="group-left">
-        <img src="placeholder.png">
-
-        <div class="main">
-          <!-- ここで横配置化 -->
-          
-          <span class="manga-type">横漫画</span>
-          <!-- 微妙にズレがあるっぽいので要改善 -->
-          
-          <span class="title">
-            <strong>菊門疆1</strong>
-            <span>作者名</span>
-          </span>
-        </div>
-      </div>
-
-      <!-- 以下　菊門疆2 -->
-      <div class="group-left">
-        <img src="placeholder.png">
-
-        <div class="main">
-          <!-- ここで横配置化 -->
-          
-          <span class="manga-type">小説</span>
-          <!-- 表示位置を中心にしたい -->
-          
-          <span class="title">
-            <strong>菊門疆2</strong>
-            <span>ドヴァーラヴァティ</span>
-          </span>
-        </div>
-      </div>
-
-            <!-- 以下　菊門疆3 -->
-      <div class="group-left">
-        <img src="placeholder.png">
-
-        <div class="main">
-          <!-- ここで横配置化 -->
-          
-          <span class="manga-type">縦漫画</span>
-          
-          <span class="title">
-            <strong>菊門疆３３３３３３３３３３</strong>
-            <!-- 一定以上の文字量で縮小、改行する処理が欲しい 表示位置もズレるが理由不明 -->
-
-            <span>ああああああああああああああああああああ</span>
-          </span>
-        </div>
-      </div>
-
-      <!-- 以下　菊門疆4 -->
-      <div class="group-left">
-        <img src="placeholder.png">
-
-        <div class="main">
-          <!-- ここで横配置化 -->
-          
-          <span class="manga-type">横漫画</span>
-          <!-- 微妙にズレがあるっぽいので要改善 -->
-          
-          <span class="title">
-            <strong>菊門疆4</strong>
-            <span>作者名</span>
-          </span>
-        </div>
-      </div>
-
-      <!-- 以下　追加 -->
-      <div class="group-left">
-        <!-- <img src="placeholder.png"> -->
-        <div class="img2">
-          <div>+</div>
-        </div>
-
-        <div class="main">
-          <!-- ここで横配置化 -->
-          
-          <span class="manga-type2">　　　</span>
-          
-          <span class="title2">
-            <strong>追加する</strong>
-          </span>
-        </div>
-      </div>
-
-    </div>
-      
+  <div class="mask-main"></div>
 
 </body>
 </html>
