@@ -3,582 +3,1202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UI2</title>
-    <meta name="description" content="UI">
-    <!-- <link rel="stylesheet" href="./style.css"> -->
-    <style>
-body {
-  font-family: system-ui, sans-serif;
-  background:#f4f4f4;
-  margin: 0;
-  padding: 0;
-}
-button {
-  padding: 0;
-  border: none;
-  outline: none;
-  font: inherit;
-  color: inherit;
-  background: none;
-  text-align: left;
-}
+    <title>UI</title>
 
-/* 横並び化 */
-#books{
-  display: flex;
-  align-items: flex-start;
-}
+<style>
+    /* 初期化 */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        list-style: none;
+        text-decoration: none;
+        font-family: system-ui, sans-serif;
+    }
+    #layout{
+        display: flex;
+        min-height: 100vh;
+    }
+    input[type=radio] {
+    display: none; /* ラジオボタンを非表示にする */
+    }
 
-/* バックグラウンド */
-button.main{
-  max-width: 135px;
-  min-width: 135px;
-  height: 190px;
-  border-radius: 15px;
-  display: flex;
-  transition: background 150ms ease;
-}
-button.main:hover{
-  background: #cacdd4;
-  filter: brightness(0.95);
-  
-}
+    /* 
+    book
+     */
+    button {
+    padding: 0;
+    border: none;
+    outline: none;
+    font: inherit;
+    color: inherit;
+    background: none;
+    text-align: left;
+    }
 
-/* メニュー */
-.menu{
-  display: flex;
-  writing-mode: vertical-rl;
-  width: 1.25em;
-  height: 190px;
-  align-items: center; 
-  text-align: center;
-}
-.menu .orientation{
-  padding: 0.25em 0.1em;
-  display: inline-block;
-  height: 3.5em;
-  background-color: #000000;
-  color: white;
-  font-weight: bold;
-  font-size: 0.8em;
-  border-radius: 15px;
-}
-.menu .nsfw{
-  display: inline-block;
-  height: 1.12em;
-  width: 1.12em;
-  margin-bottom: 0.1em;
-  background-color: #bd133e;
-  border-radius: 15px;
-}
-.menu a{
-  text-align: left; 
-  writing-mode: vertical-rl; 
-  letter-spacing: -0.5em; 
-  height: 45px; 
-  text-decoration: none; 
-  color: #4d4d4d;
-}
+    /* 横並び化 */
+    #books{
+    display: flex;
+    align-items: flex-start;
+    }
 
-/* タイトル */
-.title{
-  display: block;
-}
-.title img{
-  margin: none;
-  width: 100px; 
-  height: 140px; 
-  object-fit: cover; 
-  background-color: #ffffff; 
-  border-radius: 6px;
-}
-.title strong{
-  display: inline-block;
-  width: 100px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  vertical-align: top;
-}
-.title a{
-  display: block;
-  font-size: 0.7em;
-  width: 100px;
-  white-space: nowrap; 
-  overflow: hidden; 
-  text-overflow: ellipsis;
-}
+    /* バックグラウンド */
+    button.main{
+    max-width: 120px;
+    min-width: 120px;
+    height: 185px;
+    min-height: 185px;
+    border-radius: 0 0 0 15px;
+    display: flex;
+    margin-right: 10px;
+    transition: background 150ms ease;
+    }
+    button.main:hover{
+    background: #cfcfcf;
+    filter: brightness(0.95);
+    
+    }
 
-/* 以下、メインUI *//* レディレッド色#ED1A3D */
+    /* メニュー */
+    .menu{
+    display: flex;
+    writing-mode: vertical-rl;
+    width: 1.25em;
+    height: 190px;
+    align-items: center; 
+    text-align: center;
+    }
+    .menu .orientation{
+    padding: 0.25em 0.1em;
+    display: inline-block;
+    height: 3.5em;
+    background-color: #000000;
+    color: white;
+    font-weight: bold;
+    font-size: 0.8em;
+    border-radius: 0 0 0 10px;
+    }
+    .menu .nsfw{
+    display: inline-block;
+    height: 1.12em;
+    width: 1.12em;
+    margin-bottom: 0.1em;
+    background-color: #bd133e;
+    border-radius: 15px;
+    }
+    .menu a{
+    text-align: left; 
+    writing-mode: vertical-rl; 
+    letter-spacing: -0.5em; 
+    height: 45px; 
+    text-decoration: none; 
+    color: #4d4d4d;
+    }
 
-/* 
-main, header, side配置
-*/
-#flex{
-  display: flex;
-}
-.cross{
-  position: fixed; margin-left: 3vh; width: 10vh; height: 100vh; background-color: #bd133e; top: 0; z-index: -1;
-}
+    /* タイトル */
+    .title{
+    display: block;
+    }
+    .title img{
+    margin: none;
+    width: 100px; 
+    height: 140px; 
+    object-fit: cover; 
+    background-color: #ffffff; 
+    border-radius: 6px;
+    }
+    .title strong{
+    display: inline-block;
+    width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
+    }
+    .title a{
+    display: block;
+    font-size: 0.7em;
+    width: 100px;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    }
 
-/* 
-head
- */
-.head{
-  margin-top: 3vh;
-  background-color: #bd133e;
-  width: 100vw;
-  height: 10vh;
-  overflow: hidden;
-}
-.bg-text{
-  position: absolute;
-  color: #fff;
-  opacity: 0.4;
-  font-size: 8em;
-  letter-spacing: -0.05em;
-  top: -20px;
-  pointer-events: none;
-  transform: rotate(-5deg);
-}
-/* 
-sidemenu
-*/
-.sidemenu{
-  display: block; margin-left: 3vh; width: 10vh;
-}
-.sidebuttons{
-  position: sticky;
-  margin-left: -10vh;
-  top: 0;  display: block; width: 10vh; height: 90vh; z-index: 3;
-}
-.sidebuttons button{
-cursor: pointer;
-position: relative;
-background-color: #ffffff;
-font-weight: bold;
-padding-left: 10px;
-font-size: 1.5em;
+    /* 
+    sidebar
+     */
+     :root{
+        --sidewidth: 20vw;
+        --rightwidth: 5vw;
+        --radius: 100px;
+     }
+    .sidebar {
+        display: block;
+        background-color: white;
+        height: 100vh;
+    }
+    .sidebar header{
+        height: 125px;
+        width: var(--sidewidth);
+        overflow: hidden;
+        border-radius: 0 0 50px 0;
+        border-right: 4px solid #000;
+        border-bottom: 4px solid #000;
+    }
+    .sidebar header p{
+        display: flex;
+        color: #ffffff;
+        font-size: 950%;
+        font-weight: bold;
+        align-items: flex-start;
+        letter-spacing: -15px;
+        margin-top: -40px;
+        margin-left: -40px;
+        opacity: 50%;
 
-width: 200px;
-height: 50px;
-border-radius: 0 0 15px 0;
-border-right: 4px solid #000;
-border-bottom: 4px solid #000;
+        transform: rotate(-5deg);
+    }
+    .sidebar ul a,
+    .profile{
+        display: block;
+        height: 100%;
+        width: 80%;
+        padding: 3%;
+        font-size: 1.5em;
+        font-weight: bold;
 
-transform: translateX(-90%);
-transition: transform 0.3s ease;
-}
-.sidebuttons button:hover{
-transform: translateX(-11%);
+        color: black;
+        background-color: white;
+        border-radius: 0 0 15px 0;
+        border-right: 4px solid #000;
+        border-bottom: 4px solid #000;
+
+        transform: translateX(-75%);
+        transition: transform 0.3s ease;
+    }
+    .sidebar ul a:hover{
+        transform: translateX(0%);
+    }
+    .profile{
+        transform: translateX(0%);
+        border-radius: 0 0 50px 0;
+        width: 100%;
+    }
+    .profile img{
+        background-color: #000;
+        border-radius: 50%;
+    }
+
+    /* 
+    arrow
+     */
+    .arrow{
+        display: inline-block;
+        position: fixed;
+        right: 2px;
+        top: 2px;
+        font-size: 0.6em;
+        
+        transition: transform 0.3s ease;
+    }
+    .sidebar ul a:hover .arrow{
+        transform: rotate(90deg);
+    }
+
+    /* 
+    mainmenu
+     */
+    .bottom-display{
+        display: flex;
+    }
+    .mainmenu{
+        width: calc(100% - (var(--sidewidth) + var(--rightwidth)));
+    }
+    .top{
+        background-color: white;
+        border-radius: 0 0 var(--radius) 0;
+        height: 65vh;
+        box-shadow: 4px 4px #000;
+    }
+    .bottom{
+        height: 35vh;
+        width: calc(100% - var(--radius));
+        background-color: white;
+    }
+    .category{
+        background-color: #000;
+        padding: 5px 0px 5px 10px;
+        font-size: 2em;
+        font-weight: bold;
+        color: white;
+    }
+    .bookarea{
+        background-color: #dddddd;
+        height: 70%;
+        border-radius: 0 0 0 50px;
+        padding: 10px;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    .bookarea #books{
+        display: flex;
+        flex-wrap: wrap;              /* ← 改行を許可 */
+        scale: 1;
+        padding: 10px;
+        gap: 15px;
+        transform-origin: left;
+    }
+
+    .bottom2{
+        height: 35vh;
+        width: var(--radius);
+        border-radius: var(--radius) 0 0 0;
+
+        transform: translateX(-100px);
+        box-shadow: inset 4px 4px #000;
+    }
+
+    /* 
+    second
+     */
+    #second-layout{
+        width: 100%;
+        height: 100vh;
+        display: flex;
+    }
+    .second-mainmenu{
+        width: calc(100% - (var(--sidewidth) + var(--rightwidth) + var(--radius) * 2));
+        display: block;
+    }
+    .rightred{
+        width: calc(var(--radius) * 2 + var(--rightwidth));
+        box-shadow: inset 4px 0 #000;
+    }
+
+    #layout,
+    .sidebar header,
+    .bottom2,
+    .rightred{
+        background-color: #bd133e;
+    }
+
+    .toptitle > strong{
+        padding-top: 5px;
+        display: block;
+        text-align: center;
+        font-size: 2em;
+    }
+    .toptitle h3{
+        display: block;
+        text-align: center;
+        color: #bd133e;
+    }
+    .toptitle p{
+        display: block;
+        text-align: center;
+        color: #0004ff;
+        font-weight: bold;
+    }
+
+    .topmenu{
+        margin-top: 50px;
+        display: flex;
+    }
+    .topmenu div{
+        width: 300px;
+    }
+    .topmenu .news{
+        width: 72%;
+    }
+    .topmenu .news h3{
+        display: block;
+        text-align: left;
+        color: #bd133e;
+    }
+    .topmenu .news li{
+        margin-top: 10px;
+        width: 100%;
+        height: 30px;
+        border-bottom: 1px solid #000;
+        overflow: hidden;
+    }
+
+
+  /* --- ポップアップ背景 --- */
+  #popupBg {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: none; /* 初期は非表示 */
+    justify-content: center;
+    align-items: center;
   }
-.arrow2{
-  display: inline-block;
-  font-size: 0.4em;
+
+  /* --- ポップアップ本体 --- */
+  #popup{
+    position: absolute;
+    background: #ffffff;
+    width:350px;
+    height: 600px;
+    clip-path: polygon(calc(100% - 0px) 0px, calc(100% - 0px) calc(100% - 270px), calc(100% - 0px) calc(100% - 270px), calc(100% - 0.592803px) calc(100% - 262.595397px), calc(100% - 2.3095439999999px) calc(100% - 255.567456px), calc(100% - 5.057721px) calc(100% - 249.008679px), calc(100% - 8.744832px) calc(100% - 243.011568px), calc(100% - 13.278375px) calc(100% - 237.668625px), calc(100% - 18.565848px) calc(100% - 233.072352px), calc(100% - 24.514749px) calc(100% - 229.315251px), calc(100% - 31.032576px) calc(100% - 226.489824px), calc(100% - 38.026827px) calc(100% - 224.688573px), calc(100% - 45.405px) calc(100% - 224.004px), calc(100% - 46.595px) calc(100% - 223.996px), calc(100% - 46.595px) calc(100% - 223.996px), calc(100% - 53.973173px) calc(100% - 223.311427px), calc(100% - 60.967424px) calc(100% - 221.510176px), calc(100% - 67.485251px) calc(100% - 218.684749px), calc(100% - 73.434152px) calc(100% - 214.927648px), calc(100% - 78.721625px) calc(100% - 210.331375px), calc(100% - 83.255168px) calc(100% - 204.988432px), calc(100% - 86.942279px) calc(100% - 198.991321px), calc(100% - 89.690456px) calc(100% - 192.432544px), calc(100% - 91.407197px) calc(100% - 185.404603px), calc(100% - 92px) calc(100% - 178px), calc(100% - 92px) calc(100% - 50px), calc(100% - 92px) calc(100% - 50px), calc(100% - 92.654422px) calc(100% - 41.889798px), calc(100% - 94.549056px) calc(100% - 34.196224px), calc(100% - 97.580954px) calc(100% - 27.022226px), calc(100% - 101.647168px) calc(100% - 20.470752px), calc(100% - 106.64475px) calc(100% - 14.64475px), calc(100% - 112.470752px) calc(100% - 9.647168px), calc(100% - 119.022226px) calc(100% - 5.580954px), calc(100% - 126.196224px) calc(100% - 2.549056px), calc(100% - 133.889798px) calc(100% - 0.65442200000001px), calc(100% - 142px) calc(100% - 0px), 0px calc(100% - 0px), 0px 217px, 0px 217px, 0.6544166px 208.889798px, 2.5490368px 201.196224px, 5.5809162px 194.022226px, 9.6471104px 187.470752px, 14.644675px 181.64475px, 20.4706656px 176.647168px, 27.0221378px 172.580954px, 34.1961472px 169.549056px, 41.8897494px 167.654422px, 50px 167px, 117px 167px, 117px 167px, 125.110202px 166.345578px, 132.803776px 164.450944px, 139.977774px 161.419046px, 146.529248px 157.352832px, 152.35525px 152.35525px, 157.352832px 146.529248px, 161.419046px 139.977774px, 164.450944px 132.803776px, 166.345578px 125.110202px, 167px 117px, 167px 0px, calc(100% - 0px) 0px); 
+    padding: 20px 30px;
+    text-align: bottom;
+  }
+  .popupred{
+    position: absolute;
+    width: 250px;
+    height: 90px;
+    transform: translateY(-255px) translateX(100px);
+    border-radius: 0 0 50px 0;
+    background-color: #bd133e;
+    border-right: 4px solid #000;
+    border-bottom: 4px solid #000;
+    overflow: hidden;
+  }
+  .popupred p{
+        display: flex;
+        color: #ffffff;
+        font-size: 400%;
+        font-weight: bold;
+        align-items: flex-start;
+        letter-spacing: -4px;
+        margin-top: 10px;
+        margin-left: 0px;
+        opacity: 50%;
+
+        transform: rotate(-5deg);
+  }
+  .pre-view{
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    transform: translateY(-227px) translateX(-102px);
+    border-radius: 25px 25px 50px 25px;
+    background-color: #b9b9b9;
+    background-image:
+        radial-gradient(#888888 10%, transparent 15%),
+        radial-gradient(#888888 10%, transparent 15%);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    
+    border: 4px solid #000;
+    overflow: hidden;
+  }
+
+
+
+.scene {
+  perspective: 1200px;
+}
+  /* 回転・移動担当 */
+.card {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.45s ease;
+  will-change: transform;
+}
+
+/* 傾きパターン（安全角度） */
+.tilt-1 { transform: rotateX(30deg) rotateY(12deg) translateZ(400px) translateX(-70px) translateY(200px); background-color: none;}
+.tilt-2 { transform: rotateX(-12deg) rotateY(18deg) translateZ(300px) translateX(-50px) translateY(-20px); background-color: none;}
+.tilt-3 { transform: rotateX(-10deg) rotateY(-10deg) translateZ(300px) translateX(70px) translateY(-30px); background-color: none;}
+.tilt-4 { transform: rotateX(-10deg) rotateY(10deg) translateZ(200px) translateX(-30px) translateY(-40px); background-color: rgb(141, 104, 73);}
+.reset  { transform: rotateX(0deg) rotateY(0deg) translateZ(0px) translateX(0px) translateY(0px); background-color: none;}
+
+#popupBg section{
+    position: absolute;
+    background-color: #ffffff;
+    width: 180px;
+    height: 290px;
+    margin-left: 170px;
+    margin-bottom: 132px;
+    border-radius: 0 0 50px 0;
+    overflow: hidden;
+    display: block;
+}
+
+/* 操作UI */
+.controls {
   position: absolute;
-  right: 5px;
+  margin-top: 0px;
+}
+
+.controls button {
+  display: block;
+  width: 200px;
+  height: 50px;
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: #ffffff;
+  border-radius: 0 0 0 15px;
+  border-left: 4px solid #000;
+  border-bottom: 4px solid #000;
+  overflow: hidden;
+  transform: translateX(75%);
+
   transition: transform 0.3s ease;
 }
-.sidemenu button:hover .arrow2{
-  transform: rotate(90deg);
+.controls button:focus{
+    transform: translateX(0%);
+}
+.controls button p{
+    font-weight: bold;
+    font-size: 1.3em;
+    text-align: center;
+    margin-left: -15px;
 }
 
-/* 
-mainmenu
- */
-.mainmenu{
-  z-index: 2;
-  display: block;
-}
-.mainmenu #books{
-  padding-left: 0.5em;
-}
-.mask-main{
+/* 左側の文字 */
+.label {
   position: absolute;
-  top: 13vh;
-  left: 13vh;
-  width: calc(100vw - 200px);
-  height: 90vh;
-  background: #f4f4f4;
-  pointer-events: none;
-  z-index: 1;
-}
-.ahoybooks{
-  line-height: 1.05em;
-  font-weight: bold;
-  width: 52vw;
-  font-size: 3em;
-  color: #ffffff;
-  background-color: #000;
-  letter-spacing: -0.05em;
-}
-.search,.search3{
-  
-  padding: 0;
-  position: relative;
-  background-color: #f4f4f4;
-  font-weight: bold;
-  padding-left: 10px;
-  font-size: 1.5em;
-
-  width: 500px;
+  left: 0;
+  width: 150px;
   height: 50px;
-  border-radius: 0 0 50px 0;
-  border-right: 4px solid #000;
-  border-bottom: 4px solid #000;
-  transform: translateX(-27%);
-  }
-  .search input{
-    position: absolute;
-    width: 50%;
-    height: 50%;
-    top: 20%;
-    right: 21.5%;
-  }
+  margin-top: -50px;
+  color: #bbbbbb;
 
-
-  .search3{
-    width: 20vw;
-  border-radius: 50px 0 0 0;
-  border-left: 4px solid #bd133e;
-  border-top: 4px solid #bd133e;
-  border-right: none;
-  border-bottom: 4px solid #000;
-  transform: translateX(113%);
-  scale: 119%;
-  }
-  .searchArea{
-    width: 50vw;
-    height: 175px;
-    background-color: #ddd;
-    overflow-x: auto;
-    overflow-y: hidden;
-    border-radius: 0 0 25px 0;
-  }
-  .searchArea #books{
-    display: flex;
-    flex: 0 0 auto;
-    transform: scale(0.8);
-    transform-origin: left center;
-  }
-
-  .bookArea{
-    width: 50vw;
-    height: 50vw;
-    background-color: #ddd;
-    overflow-x: hidden;
-    overflow-y: auto;
-    border-radius: 0 0 25px 0;
-  }
-  .bookArea #books{
   display: flex;
-  flex-wrap: wrap;              /* ← 改行を許可 */
-  transform: scale(0.8);
-  transform-origin: left;
+  align-items: center;
+
+  font-weight: bold;
+  font-size: 1.1em;
+  transition: opacity 0.1s ease;
+  border-bottom: 1px solid #797979;
+}
+/* 左文字を消す */
+.controls button:focus + .label {
+  opacity: 0;
 }
 
-/* 1冊の幅を 1/5 に固定 */
-.bookArea #books > .main{
-  flex: 0 0 calc(100% / 5);     /* ← 5個で1行 */
-  max-width: calc(100% / 5);
-} 
 
-  .otherArea p{
-    margin: 0;
-    width: 50vw;
-    height: 50px;
-    background-color: #ddd;
-  }
-  .otherArea p:last-child{
-    margin-bottom: 1em;
-    border-radius: 0 0 25px 0;
-  }
-
-
-  @media (max-width: 768px) {
-  /* スマホ用 */
-  .sidemenu,
-  .cross,
-  .search3 {
-    display: none;
-  }
-  .head {
-    height: 10vh;
-    margin-top: 0;
-  }
-
-  .bg-text {
-    font-size: 5em;
-    top: 10;
-  }
-  .mainmenu {
-    width: 100vw;
-  }
-
-  .mask-main {
-    display: none;
-  }
-  .search {
-    transform: none;
-    width: 100vw;
-  }
-
-  .search input {
-    width: 80%;
-    right: 10%;
-  }
-
-  .ahoybooks {
-    width: auto;
+.card-inner .main{
+    max-width: 120px;
+    min-width: 120px;
+    height: 185px;
+    min-height: 185px;
+    border-radius: 0 0 0 15px;
+    display: flex;
+    margin-left: 17px;
+    margin-top: 5px;
+    scale: 0.9;
+    }
+.card-inner .main:hover{
+    background: transparent;
+}
+.card-inner .main .title strong{
+    height: 1.4em;
+    background-color: rgb(255, 255, 255);
+    color: #000000;
+    padding-left: 0.1em;
+    transform: translateY(0.05em);
+    border: 1px solid #000;
+    box-sizing: border-box;
+}
+.card-inner .main .title .img{
+    margin: none;
+    width: 100px; 
+    height: 140px; 
+    border-radius: 6px;
+    background-color: #ffffff;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    
+}
+.closePopup{
+    position: absolute;
+    transform: translateX(125px) translateY(125px);
+    background-color: #bd133e;
+    height: 75px;
+    width: 75px;
+    border-radius: 50%;
+    border: 4px solid #000;
+}
+.closePopup p{
+    color: #ffffff;
+    text-align: center;
     font-size: 2em;
+    font-weight: bold;
+}
+#setting{
+    position: absolute;
+    transform: translateX(-70px) translateY(200px);
+    width: 250px;
+    height: 200px;
+    overflow: hidden;
+}
+/* title */
+#setting .title-setting{
+    padding: 10px;
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 0 0 25px 0;
+    border-bottom: 4px solid #000;
+    border-right: 4px solid #000;
+    width: 100%;
+    height: 50%;
+    transform: translateX(-100%);
+
+    transition: transform 0.45s ease;
+    transition-delay: 0.2s;
+}
+#setting .title-setting input{
+    width: 100%;
+}
+#setting .title-setting.setting-1 {
+  transform: translateX(0%);
+}
+
+/* type */
+#setting .type-setting{
+    padding: 10px;
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 0 0 25px 0;
+    border-bottom: 4px solid #000;
+    border-right: 4px solid #000;
+    width: 100%;
+    height: 25%;
+    transform: translateX(-100%);
+
+    transition: transform 0.45s ease;
+    transition-delay: 0.2s;
+}
+#setting .type-setting label{
+    display: flex;
+    justify-content: center;   /* 縦書き時の「左右中央」 */
+    align-items: center;       /* 縦書き時の「上下中央」 */
+
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+
+    float: left;
+    font-weight: bold;
+    font-size: 1.2em;
+    width: 40px;
+    height: 100px;
+    padding: 5px;
+    margin-top: 5px;
+
+    color: #ffffff;
+    background-color: #000;
+    border-radius: 0 0 0 15px;
+    cursor: pointer;
+
+    transition: height 0.3s ease;
+}
+#setting .type-setting input {
+  display: none;
+}
+#setting .type-setting input:checked + label {
+  height: 150px;
+}
+#setting .type-setting.setting-2 {
+  transform: translateX(0%);
+}
+/* cover */
+#setting .cover-setting{
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    background-color: #ffffff;
+    border-radius: 0 0 25px 0;
+    border-bottom: 4px solid #000;
+    border-right: 4px solid #000;
+    width: 100%;
+    height: 20%;
+
+    transform: translateX(-100%);
+
+    transition: transform 0.45s ease;
+    transition-delay: 0.2s;
+}
+#setting .image{
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 0 0 25px 0;
+    border-bottom: 4px solid #000;
+    border-right: 4px solid #000;
+    width: 50%;
+    height: 80%;
+
+    transform: translateX(-100%);
+
+    transition: transform 0.45s ease;
+    transition-delay: 0.1s;
+}
+#preview{
+    margin-left: 10px;
+    margin-top: 7px;
+    width: 100px; 
+    height: 140px; 
+    object-fit: cover; 
+    background-color: #b6b6b6; 
+    border-radius: 0 0 15px 0;
+    }
+#setting .cover-setting.setting-3 {
+  transform: translateX(0%);
+}
+#setting .image.setting-3 {
+  transform: translateX(0%);
+}
+
+/* dvaravati */
+#setting .dvaravati-setting{
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    background-color: #ffffff;
+    border-radius: 0 0 25px 0;
+    border-bottom: 4px solid #000;
+    border-right: 4px solid #000;
+    width: 100%;
+    height: calc(100% / 3);
+
+    transform: translateX(-100%);
+
+    transition: transform 0.45s ease;
+    transition-delay: 0.2s;
+}
+#setting .dvaravati-setting.setting-4 {
+  transform: translateX(0%);
+}
+
+/* check */
+#setting .check-title{
+    padding: 10px;
+    position: absolute;
+    display: block;
+    bottom: 80%;
+    background-color: #ffffff;
+    border-radius: 0 0 25px 0;
+    border-bottom: 4px solid #000;
+    border-right: 4px solid #000;
+    width: 100%;
+    height: 20%;
+    text-align: left;
+
+    transform: translateX(-100%);
+
+    transition: transform 0.45s ease;
+    transition-delay: 0.1s;
+}
+#setting .check-type{
+    padding: 10px;
+    position: absolute;
+    display: block;
+    bottom: 60%;
+    background-color: #ffffff;
+    border-radius: 0 0 25px 0;
+    border-bottom: 4px solid #000;
+    border-right: 4px solid #000;
+    width: 100%;
+    height: 20%;
+    text-align: left;
+    padding-left: 52%;
+    padding-bottom: 6px;
+
+    transform: translateX(-100%);
+
+    transition: transform 0.45s ease;
+    transition-delay: 0.2s;
+}
+#setting .check-upload{
+    padding: 10px;
+    position: absolute;
+    display: block;
+    bottom: 0%;
+    background-color: #ffffff;
+    border-radius: 0 0 25px 0;
+    border-bottom: 4px solid #000;
+    border-right: 4px solid #000;
+    width: 80%;
+    height: 40%;
+    text-align: left;
+    padding-left: 53%;
+    padding-bottom: 6px;
+
+    transform: translateX(-100%);
+
+    transition: transform 0.45s ease;
+    transition-delay: 0.5s;
+}
+#setting .check-upload button{
+    cursor: pointer;
+    display: flex;
+    background-color: #00a5bf;
+    color: #fff;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 1.2em;
+
+    justify-content: center; /* 横方向中央 */
+    align-items: center;     /* 縦方向中央 */
+    text-align: center;
+}
+#setting .check-image{
+    position: absolute;
+    bottom: 0;
+    background-color: #ffffff;
+    border-radius: 0 0 25px 0;
+    border-bottom: 4px solid #000;
+    border-right: 4px solid #000;
+    width: 50%;
+    height: 80%;
+
+    transform: translateX(-100%);
+
+    transition: transform 0.45s ease;
+    transition-delay: 0.3s;
+}
+#setting .check-title.setting-5 {
+  transform: translateX(0%);
+}
+#setting .check-type.setting-5 {
+  transform: translateX(0%);
+}
+#setting .check-image.setting-5 {
+  transform: translateX(0%);
+}
+#setting .check-upload.setting-5 {
+  transform: translateX(0%);
+}
+
+/* =========================
+   Smartphone / Tablet 대응
+   ========================= */
+@media (max-width: 768px) {
+
+  /* ---- 全体 ---- */
+  body {
+    overflow-x: hidden;
   }
-  .bookArea {
-    width: 100vw;
+
+  #layout {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  /* ---- sidebar ---- */
+  .sidebar {
+    width: 100%;
     height: auto;
   }
 
-  .bookArea #books {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    transform: none;
-    margin: 0;
-  }
-
-  .bookArea #books > .main {
-    max-width: none;
-  }
-
-  .bookArea button.main{
-  transform: scale(0.9);
-  }
-  .searchArea {
-    width: 100vw;
+  .sidebar header {
+    width: 100%;
+    height: 80px;
     border-radius: 0;
   }
-  .searchArea #books {
-    transform: scale(0.9);
+
+  .sidebar header p {
+    font-size: 300%;
+    margin: 0;
+    letter-spacing: -6px;
   }
 
-  .otherArea p {
+  .sidebar ul a,
+  .profile {
+    width: 100%;
+    transform: none;
+    border-radius: 0;
+  }
+
+  .sidebar ul a:hover {
+    transform: none;
+  }
+
+  /* ---- mainmenu ---- */
+  .mainmenu {
     width: 100%;
   }
+
+  .top {
+    height: auto;
+    border-radius: 0;
+  }
+
+  .bottom-display {
+    flex-direction: column;
+  }
+
+  .bottom {
+    width: 100%;
+    height: auto;
+  }
+
+  .bottom2 {
+    display: none;
+  }
+
+  /* ---- book area ---- */
+  .bookarea {
+    height: auto;
+    max-height: 50vh;
+  }
+
+  .bookarea #books {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 10px 0;
+  }
+
+  button.main {
+    min-width: 110px;
+    max-width: 110px;
+    height: 170px;
+  }
+
+  /* ---- second layout ---- */
+  #second-layout {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+  }
+
+  .second-mainmenu {
+    width: 100%;
+  }
+
+  .rightred {
+    display: none;
+  }
+
 }
 
 
+</style>
 
-
-
-    </style>
 </head>
 <body>
+    <div id="layout">
+    
+        <div class="sidebar">
+            <header><p>TOP.</p></header>
+            <ul>
 
+                <div class="profile">
+                    <img src="placeholder.png">
+                    a
+                </div>
 
-  <strong class="bg-text">TOP.</strong>
-  <div class="head"></div>
-  <div class="cross"></div>
+                <li>
+                    <a href="#" onclick="alert('未実装❤')">
+                        <p class="arrow">▶</p>
+                        PROFILE.
+                    </a>
+                </li>
 
-  <div id="flex">
-    <div class="sidemenu"></div>
-    <div class="sidebuttons">
-        <button onclick="alert('未実装❤')">OPTION.
-          <span class="arrow2" >▶</span>
-        </button>
-        <button onclick="alert('みっじそう')">ITEMS.
-          <span class="arrow2">▶</span>
-        </button>
-        <button onclick="alert('クリラ・レスコンディア')">YOUTUBE.
-          <span class="arrow2">▶</span>
-        </button>
-        <button onclick="alert('未実装')">XVIDEOS.
-          <span class="arrow2">▶</span>
-        </button>
-        <button onclick="alert('近日公開')">未実装.
-          <span class="arrow2">▶</span>
-        </button>
-        <button onclick="alert('大嘘')">本名一覧.
-          <span class="arrow2">▶</span>
-        </button>
+                <li>
+                    <a href="#" onclick="alert('みっじそう')">
+                        <p class="arrow">▶</p>
+                        OPTION.
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" onclick="alert('未実装よ❤')">
+                        <p class="arrow">▶</p>
+                        WORKS.
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" onclick="alert('そんなものは無い')">
+                        <p class="arrow">▶</p>
+                        TUTORIAL.
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" onclick="alert('大嘘')">
+                        <p class="arrow">▶</p>
+                        本名一覧
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="mainmenu">
+            <section class="top">
+                <section class="toptitle">
+                    <strong>ご入学おめでとうございます</strong>
+                    <h3>★ドヴァーラヴァティ王国王立ドゥッボール大ハーンドデカヅチャーノウドントリバード大学通称ハーバード大学★</h3><br>
+                    <p>あなたは未実装人目の新入生です！！</p>
+                </section>
+
+                <button id="openPopup">入力ポップアップを開く</button>
+
+            </section>
+            
+            <div class="bottom-display">
+                <section class="bottom">
+                    <p class="category">Search.</p>
+                    <div class="bookarea">
+                        <div id="books">
+                            未実装なのぉお"お"お"ん"
+                        </div>
+                    </div>
+                </section>
+                <section class="bottom2"></section>
+            </div>
+        </div>
+
     </div>
 
-    <section class="mainmenu">
-      <!-- search -->
-      <button  class="search3"></button>
-      <div class="ahoybooks">Search.</div><!-- Search.文字 -->
-      <button class="search"><input type="text"></button>
-      
-      <div class="searchArea"><!-- 表示エリア -->
-        <div id="books">
-          <button class="main">
-            <div class="menu">
-              <div class="orientation">漫画</div>
-              <a>・・・</a>
+    <div id="second-layout">
+        <div class="sidebar" style="width: var(--sidewidth);"></div>
+
+        <div class="second-mainmenu">
+            <p class="category">Books.</p>
+            <div class="bookarea">
+
+            <div id="books">
+
+                <button class="main">
+                    <div class="menu">
+                    <div class="orientation">漫画</div>
+                    <a>・・・</a>
+                    </div>
+
+                    <div class="title">
+                    <img src="placeholder.png">
+                    <strong title="TITLE">タイトル</strong><br>
+                    <a>作者</a>
+                    </div>
+                </button>
+
+                <button class="main">
+                    <div class="menu">
+                    <div class="orientation">漫画</div>
+                    <a>・・・</a>
+                    </div>
+
+                    <div class="title">
+                    <img src="placeholder.png">
+                    <strong title="TITLE">タイトル</strong><br>
+                    <a>作者</a>
+                    </div>
+                </button>
+
+          </div>
+
             </div>
-
-            <div class="title">
-              <img src="placeholder.png">
-              <strong title="TITLE">タイトル</strong><br>
-              <a>作者</a>
-            </div>
-          </button>
-
-          <button class="main">
-              <div class="menu">
-                <div class="orientation">小説</div>
-                <a>・・・</a>
-              </div>
-
-              <div class="title">
-                <img src="placeholder.png">
-                <strong title="TITLE">タイトル</strong><br>
-                <a>作者</a>
-              </div>
-          </button>
-
-          <button class="main">
-              <div class="menu">
-                <div class="orientation">縦漫画</div>
-                <a>・・・</a>
-              </div>
-
-              <div class="title">
-                <img src="placeholder.png">
-                <strong title="TITLE">タイトル</strong><br>
-                <a>作者</a>
-              </div>
-          </button>
-
-          <button class="main">
-              <div class="menu">
-                <div title="R18コンテンツです" class="nsfw"></div>
-                <div class="orientation">漫画</div>
-                <a>・・・</a>
-              </div>
-
-              <div class="title">
-                <img src="placeholder.png">
-                <strong title="TITLE">タイトル</strong><br>
-                <a>作者</a>
-              </div>
-          </button>
-
-        </div>
-      </div>
-
-
-
-      <!-- books -->
-      <div style="margin-top: 0.5em;" class="ahoybooks">Books.</div><!-- Books.文字 -->
-      <button class="search"></button><!-- 装飾 -->
-      <div class="bookArea" style="height: 50vw;">
-        <div id="books">
-
-          <button class="main">
-            <div class="menu">
-              <div class="orientation">漫画</div>
-              <a>・・・</a>
-            </div>
-
-            <div class="title">
-              <img src="placeholder.png">
-              <strong title="TITLE">タイトル</strong><br>
-              <a>作者</a>
-            </div>
-          </button>
-          <button class="main">
-            <div class="menu">
-              <div class="orientation">漫画</div>
-              <a>・・・</a>
-            </div>
-
-            <div class="title">
-              <img src="placeholder.png">
-              <strong title="TITLE">タイトル</strong><br>
-              <a>作者</a>
-            </div>
-          </button>
-          <button class="main">
-            <div class="menu">
-              <div class="orientation">漫画</div>
-              <a>・・・</a>
-            </div>
-
-            <div class="title">
-              <img src="placeholder.png">
-              <strong title="TITLE">タイトル</strong><br>
-              <a>作者</a>
-            </div>
-          </button>
-          <button class="main">
-            <div class="menu">
-              <div class="orientation">漫画</div>
-              <a>・・・</a>
-            </div>
-
-            <div class="title">
-              <img src="placeholder.png">
-              <strong title="TITLE">タイトル</strong><br>
-              <a>作者</a>
-            </div>
-          </button>
-
-          <button class="main">
-              <div class="menu">
-                <div class="orientation">小説</div>
-                <a>・・・</a>
-              </div>
-
-              <div class="title">
-                <img src="placeholder.png">
-                <strong title="TITLE">タイトル</strong><br>
-                <a>作者</a>
-              </div>
-          </button>
-
-          <button class="main">
-              <div class="menu">
-                <div class="orientation">縦漫画</div>
-                <a>・・・</a>
-              </div>
-
-              <div class="title">
-                <img src="placeholder.png">
-                <strong title="TITLE">タイトル</strong><br>
-                <a>作者</a>
-              </div>
-          </button>
-
-          <button class="main">
-              <div class="menu">
-                <div title="R18コンテンツです" class="nsfw"></div>
-                <div class="orientation">漫画</div>
-                <a>・・・</a>
-              </div>
-
-              <div class="title">
-                <img src="placeholder.png">
-                <strong title="TITLE">タイトル</strong><br>
-                <a>作者</a>
-              </div>
-          </button>
-
-        </div>
-      </div>
-
-      <!-- others -->
-      <div style="margin-top: 0.5em;" class="ahoybooks">Others.</div><!-- Others.文字 -->
-      <button class="search"></button><!-- 装飾 -->
-        <div class="otherArea">
-          <p>未実装</p>
-          <p>未実装</p>
-          <p>未実装</p>
-          <p>未実装</p>
         </div>
 
-    </section>
+        <div class="rightred"></div>
+    </div>
 
-  </div>
+    <!-- ポップアップ背景 -->
+<div id="popupBg">
+  <!-- ポップアップ本体 -->
+    <div id="popup">
+        </div>
 
-  <div class="mask-main"></div>
+            <section>
+                <div class="controls">
+                    <button onclick="setTilt('tilt-1'),setSetting('setting-1')"><p>TITLE</p></button><div class="label">TITLE</div>
+                    <button onclick="setTilt('tilt-2'),setTypeSetting('setting-2')"><p>TYPE</p></button><div class="label">TYPE</div>
+                    <button onclick="setTilt('tilt-3'),setCoverSetting('setting-3')"><p>COVER</p></button><div class="label">COVER</div>
+                    <button onclick="setTilt('tilt-4'),setDovaSetting('setting-4')"><p>DVARAVATI</p></button><div class="label">???</div>
+                    <button onclick="setTilt('reset'),CheckSetting('setting-5'),resetCard()"><p>CHECK</p></button><div class="label">CHECK</div>
+                </div>
+            </section>
 
+        <div class="popupred"><p>CREATE.</p></div>
+        <div class="pre-view">
+            <div class="scene">
+                <div class="card reset" id="card">
+                    <div class="card-inner">
+                        <div class="main">
+                            <div class="menu">
+                            <div class="orientation">漫画</div>
+                            </div>
+                            <div class="title">
+                            <div class="img"></div>
+                            <strong>タイトル</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="setting">
+            <div class="title-setting">
+                <h2>TITLE.</h2>
+                <input type="text" name="booktitle" placeholder="タイトルを入力してください">
+            </div>
+
+            <div class="type-setting">
+                <h2>TYPE.</h2>
+                <input type="radio" name="bookorientation" id="comic">
+                <label for="comic">漫画</label>
+                <input type="radio" name="bookorientation" id="vertical-comic">
+                <label for="vertical-comic">縦漫画</label>
+                <input type="radio" name="bookorientation" id="novel">
+                <label for="novel">小説</label>
+                <input type="radio" name="bookorientation" id="dola">
+                <label for="dola">ドーラ</label>
+            </div>
+
+            <div class="cover-setting">
+                <input type="file" id="fileInput" accept="image/*">
+            </div>
+            <div class="image"><img id="preview" src=""></div>
+
+            <div class="dvaravati-setting">うこん</div>
+
+
+            <div class="check-title">タイトル</div>
+            <div class="check-type">種類</div>
+            <div class="check-upload"><button>GO</button></div>
+            <div class="check-image"><img id="preview" src=""></div>
+        </div>
+
+        <button class="closePopup"><p>✕</p></button>
+</div>
+    
+<script>
+
+const fileInput = document.getElementById('fileInput');
+const preview = document.getElementById('preview');
+
+fileInput.addEventListener('change', () => {
+  const file = fileInput.files[0];
+  if (!file) return;
+
+  // 画像ファイルかチェック
+  if (!file.type.startsWith('image/')) {
+    alert('画像ファイルを選択してください');
+    return;
+  }
+
+  // URLを作ってプレビュー
+  preview.src = URL.createObjectURL(file);
+});
+
+    window.addEventListener('DOMContentLoaded', () => {
+const radios = document.querySelectorAll('.type-setting input[type="radio"]');
+radios.forEach(radio => radio.checked = false);
+  });
+
+  const card = document.getElementById('card');
+function setTilt(className) {
+  card.className = 'card ' + className;
+}
+
+function resetCard() {
+  card.className = 'card reset';
+}
+
+// ボタン
+
+const titleSetting = document.querySelector('#setting .title-setting');
+const typeSetting = document.querySelector('#setting .type-setting');
+const coverSettingEl = document.querySelector('#setting .cover-setting');
+const imageEl = document.querySelector('#setting .image');
+const dovaSetting = document.querySelector('#setting .dvaravati-setting');
+
+const checkTitle = document.querySelector('#setting .check-title');
+const checkType = document.querySelector('#setting .check-type');
+const checkImage = document.querySelector('#setting .check-image');
+const checkUpload = document.querySelector('#setting .check-upload');
+
+// 解除用関数
+function resetTitleSetting() {
+  titleSetting.className = 'title-setting';
+}
+function resetTypeSetting() {
+  typeSetting.className = 'type-setting';
+}
+function resetCoverSetting() {
+  coverSettingEl.className = 'cover-setting';
+  imageEl.className = 'image';
+}
+function resetDovaSetting() {
+  dovaSetting.className = 'dvaravati-setting';
+}
+function resetCheckSetting() {
+  checkTitle.className = 'check-title';
+  checkType.className = 'check-type';
+  checkImage.className = 'check-image';
+  checkUpload.className = 'check-upload';
+}
+
+
+function setSetting(className) {
+  titleSetting.className = 'title-setting ' + className;
+  resetTypeSetting();
+  resetCoverSetting();
+  resetDovaSetting();
+  resetCheckSetting()
+}
+function setTypeSetting(className) {
+  typeSetting.className = 'type-setting ' + className;
+  resetTitleSetting();
+  resetCoverSetting();
+  resetDovaSetting();
+  resetCheckSetting()
+}
+function setCoverSetting(className) {
+  coverSettingEl.className = 'cover-setting ' + className;
+  imageEl.className = 'image ' + className;
+  resetTitleSetting();
+  resetTypeSetting();
+  resetDovaSetting();
+  resetCheckSetting()
+}
+function setDovaSetting(className) {
+  dovaSetting.className = 'dvaravati-setting ' + className;
+  resetTitleSetting();
+  resetTypeSetting();
+  resetCoverSetting();
+  resetCheckSetting()
+}
+function CheckSetting(className){
+  checkTitle.className = 'check-title ' + className;
+  checkType.className = 'check-type ' + className;
+  checkImage.className = 'check-image ' + className;
+  checkUpload.className = 'check-upload ' + className;
+  resetTypeSetting();
+  resetTitleSetting();
+  resetCoverSetting();
+  resetDovaSetting();
+}
+
+  const openPopup = document.getElementById("openPopup");
+  const popupBg = document.getElementById("popupBg");
+  const closePopup = document.querySelector(".closePopup");
+
+  // ポップアップを開く
+  openPopup.addEventListener("click", () => {
+    popupBg.style.display = "flex";
+    document.body.style.overflow = "hidden"; // ← スクロール停止
+    popupInput.focus();
+  });
+
+  // 閉じる（キャンセル）
+  closePopup.addEventListener("click", () => {
+
+    closePopupFunc(); 
+  });
+
+  function closePopupFunc() {
+  popupBg.style.display = "none";
+  document.body.style.overflow = "";
+  fileInput.value = "";
+  preview.src = "";   
+
+  const radios = document.querySelectorAll('.type-setting input[type="radio"]');
+    radios.forEach(radio => radio.checked = false);
+  resetCard(); 
+  resetTitleSetting();
+  resetTypeSetting();
+}
+
+</script>
 </body>
 </html>
